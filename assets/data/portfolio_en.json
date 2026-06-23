@@ -1,0 +1,99 @@
+{
+  "profile": {
+    "name": "Edwin Bustamante",
+    "role": "Senior Flutter Developer | Mobile Engineer",
+    "location": "Bolivia",
+    "availability": "Available immediately",
+    "email": "edwin.bustamante@email.com",
+    "phone": "+591 700 000 00",
+    "summary": "Software developer with 4+ years of experience building mobile and multiplatform experiences with Flutter, Dart, and scalable architecture. PortfolioOS presents my work as an interactive operating system."
+  },
+  "projects": [
+    {
+      "name": "E-Commerce App",
+      "category": "Flutter & Firebase",
+      "description": "Mobile marketplace with authentication, catalog, cart, and payments.",
+      "rating": "4.9",
+      "accent": "#FF6B35",
+      "technologies": ["Flutter", "Firebase", "BLoC"]
+    },
+    {
+      "name": "Fitness Tracker",
+      "category": "Health & Productivity",
+      "description": "Habit, workout, and training metrics tracker.",
+      "rating": "4.7",
+      "accent": "#00C896",
+      "technologies": ["Flutter", "Charts", "Local JSON"]
+    },
+    {
+      "name": "Crypto Wallet",
+      "category": "Web3 & Blockchain",
+      "description": "Concept wallet with dashboard, history, and asset visualization.",
+      "rating": "4.8",
+      "accent": "#9B59B6",
+      "technologies": ["Dart", "REST", "Clean Architecture"]
+    },
+    {
+      "name": "AI Chat App",
+      "category": "AI Assistant",
+      "description": "Multiplatform chat with conversational UI and API-ready architecture.",
+      "rating": "5.0",
+      "accent": "#4285F4",
+      "technologies": ["Flutter", "BLoC", "API Ready"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Mobile Developer",
+      "company": "THECUBE",
+      "period": "2022 - Present",
+      "highlights": [
+        "Technical leadership on fintech apps with Flutter.",
+        "Clean Architecture and scalable state management implementation.",
+        "Rendering performance optimization for low-end devices."
+      ]
+    },
+    {
+      "role": "Flutter Developer",
+      "company": "Xiobit Solutions",
+      "period": "2020 - 2022",
+      "highlights": [
+        "E-commerce and logistics solution development.",
+        "Firebase services and REST API integrations.",
+        "CI/CD deployment automation."
+      ]
+    },
+    {
+      "role": "Mobile Engineer Junior",
+      "company": "Utility Talent",
+      "period": "2019 - 2020",
+      "highlights": [
+        "Flutter maintenance and feature development.",
+        "RESTful API consumption and local persistence.",
+        "Agile collaboration with Scrum teams."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor's Degree in Systems Engineering",
+      "institution": "UNIVERSIDAD MAYOR DE SAN SIMÓN",
+      "status": "Graduated",
+      "certifications": [
+        "Google Certified Professional Cloud Architect",
+        "Flutter Certified Application Developer",
+        "Scrum Master Certified (PSM I)"
+      ]
+    }
+  ],
+  "skills": [
+    "Flutter",
+    "Dart",
+    "BLoC",
+    "Clean Architecture",
+    "Firebase",
+    "Supabase Ready",
+    "REST APIs",
+    "CI/CD"
+  ]
+}

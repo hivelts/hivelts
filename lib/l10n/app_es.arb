@@ -1,0 +1,18 @@
+{
+  "@@locale": "es",
+  "appTitle": "Hivelts OS",
+  "appStore": "App Store (Proyectos)",
+  "settings": "Preferencias del Sistema",
+  "terminal": "Terminal (Experiencia)",
+  "mail": "Bandeja de Entrada / Contacto",
+  "aboutMe": "Acerca de Mí",
+  "skills": "Habilidades",
+  "appearance": "Apariencia (OS)",
+  "changeLanguage": "Cambiar Idioma",
+  "changeOS": "Cambiar SO",
+  "featuredProjects": "Proyectos Destacados",
+  "professionalProfile": "Perfil Profesional",
+  "bioText": "Soy un desarrollador de software enfocado en crear experiencias digitales fluidas, escalables y visualmente impresionantes utilizando tecnologías como Flutter, Dart y Web.",
+  "location": "Ubicación",
+  "remoteGlobal": "Remoto / Global"
+}
