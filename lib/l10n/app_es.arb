@@ -14,5 +14,8 @@
   "professionalProfile": "Perfil Profesional",
   "bioText": "Soy un desarrollador de software enfocado en crear experiencias digitales fluidas, escalables y visualmente impresionantes utilizando tecnologías como Flutter, Dart y Web.",
   "location": "Ubicación",
-  "remoteGlobal": "Remoto / Global"
+  "remoteGlobal": "Remoto / Global",
+  "file": "Archivo",
+  "view": "Vista",
+  "help": "Ayuda"
 }

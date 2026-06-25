@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hivelts/core/extensions.dart';
+import 'package:hivelts/core/widgets/widgets.dart';
 import 'package:hivelts/utils/enums.dart';
 import 'package:provider/provider.dart';
 import '../../core/os_state.dart';
@@ -11,8 +13,7 @@ class MacMenuBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final osState = context.watch<OSState>();
-    final isEn = osState.currentLocale.languageCode == 'en';
-    final l10n = AppLocalizations.of(context)!;
+    final s = AppLocalizations.of(context)!;
     final now = DateTime.now();
 
     return Positioned(
@@ -23,52 +24,57 @@ class MacMenuBar extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
           child: Container(
-            height: 28,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            color: Colors.black.withValues(alpha: 0.45),
+            color: context.isDark
+                ? const Color(0xFF333335).withValues(alpha: 0.60)
+                : Colors.white.withValues(alpha: 0.10),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Left: Apple logo + App menus
-                const Icon(Icons.apple, color: Colors.white, size: 15),
+                Icon(Icons.apple, color: context.darkOrLightColor, size: 20),
                 const SizedBox(width: 16),
-                const Text(
-                  'Hivelts',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
-                ),
+                MenuText('Hivelts OS'),
                 const SizedBox(width: 16),
-                _menu('File'),
-                _menu('View'),
-                _menu('Help'),
+                MenuText(s.file),
+                MenuText(s.view),
+                MenuText(s.help),
                 const Spacer(),
+                LangPill(),
 
-                // Right: Language pill (visible!) + OS switcher + icons + clock
-                // Language switcher — always visible as a pill
-                _langPill(isEn ? 'EN' : 'ES', () {
-                  osState.setLocale(Locale(isEn ? 'es' : 'en'));
-                }),
                 const SizedBox(width: 10),
                 GestureDetector(
                   onTap: osState.toggleThemeMode,
-                  child: Icon(osState.isDarkMode ? Icons.dark_mode : Icons.light_mode, color: Colors.white, size: 15),
+                  child: Icon(
+                    osState.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                    color: context.darkOrLightColor,
+                    size: 18,
+                  ),
                 ),
                 const SizedBox(width: 10),
 
                 // OS switcher icon
                 PopupMenuButton<OS>(
-                  tooltip: l10n.changeOS,
-                  icon: const Icon(Icons.devices, color: Colors.white, size: 15),
-                  color: const Color(0xFF2D2D2D),
+                  tooltip: s.changeOS,
+                  icon: Icon(Icons.devices, color: context.darkOrLightColor, size: 18),
                   onSelected: (v) => osState.setOS(v),
                   itemBuilder: (_) => osState.supportedSystems.map((system) => _osItem(system.name, system)).toList(),
                 ),
-
-                const Icon(Icons.wifi, color: Colors.white, size: 14),
+                Text("100%", style: TextTheme.of(context).labelMedium),
+                Transform.rotate(
+                  angle: 90 * 3.14 / 180,
+                  child: Icon(Icons.battery_std_sharp, color: context.darkOrLightColor, size: 18),
+                ),
                 const SizedBox(width: 10),
-                const Icon(Icons.battery_full, color: Colors.white, size: 14),
+                Icon(Icons.wifi, color: context.darkOrLightColor, size: 18),
                 const SizedBox(width: 10),
-                Text(
-                  '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}',
-                  style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+                Icon(Icons.search, color: context.darkOrLightColor, size: 18),
+                const SizedBox(width: 10),
+                StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1)),
+                  builder: (context, _) {
+                    return MenuText(now.hourAmPm, padding: EdgeInsets.zero);
+                  },
                 ),
               ],
             ),
@@ -78,33 +84,50 @@ class MacMenuBar extends StatelessWidget {
     );
   }
 
-  Widget _menu(String label) => Padding(
-    padding: const EdgeInsets.only(right: 14),
-    child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 13)),
-  );
+  PopupMenuItem<OS> _osItem(String label, OS value) {
+    return PopupMenuItem<OS>(value: value, child: Text(label));
+  }
+}
 
-  Widget _langPill(String label, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.2),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.4)),
-        ),
-        child: Text(
-          label,
-          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
-        ),
-      ),
+class MenuText extends StatelessWidget {
+  const MenuText(this.label, {super.key, this.padding = const EdgeInsets.only(right: 14)});
+
+  final String label;
+  final EdgeInsets padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Text(label, style: TextTheme.of(context).labelMedium),
     );
   }
+}
 
-  PopupMenuItem<OS> _osItem(String label, OS value) {
-    return PopupMenuItem<OS>(
-      value: value,
-      child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 13)),
+class LangPill extends StatelessWidget {
+  const LangPill({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final osState = context.watch<OSState>();
+    final textTheme = Theme.of(context).textTheme;
+
+    final chipColor = (context.isDark ? Colors.white : Colors.black).withValues(alpha: 0.70);
+    return GestureDetector(
+      onTap: () => osState.localeSwitchEnEs(),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4),
+        child: ShaderMask(
+          blendMode: BlendMode.srcOut,
+          shaderCallback: (bounds) {
+            return LinearGradient(colors: [chipColor, chipColor]).createShader(bounds);
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2),
+            child: Text(osState.currentLocale.languageCode.toUpperCase(), style: textTheme.labelMedium),
+          ),
+        ),
+      ),
     );
   }
 }

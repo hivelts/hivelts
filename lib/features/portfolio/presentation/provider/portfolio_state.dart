@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/portfolio.dart';
-import '../../domain/usecases/get_portfolio.dart';
+import '../../domain/usecases/portfolio_usecase.dart';
 
 class PortfolioState extends ChangeNotifier {
-  final GetPortfolio getPortfolio;
+  final PortfolioUseCase portfolioUseCase;
 
   PortfolioState({
-    required this.getPortfolio,
+    required this.portfolioUseCase,
   });
 
   bool _isLoading = false;
@@ -24,7 +24,7 @@ class PortfolioState extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _portfolio = await getPortfolio(languageCode);
+      _portfolio = await portfolioUseCase.getPortafolio(languageCode);
     } catch (e) {
       _error = e.toString();
     }

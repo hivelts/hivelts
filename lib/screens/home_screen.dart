@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
-import '../widgets/experience_section.dart';
 import '../widgets/skills_section.dart';
+import '../widgets/experience_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

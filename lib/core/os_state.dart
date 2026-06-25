@@ -58,6 +58,15 @@ class OSState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void localeSwitchEnEs() {
+    if (_currentLocale.languageCode == 'en') {
+      _currentLocale = const Locale('es');
+    } else {
+      _currentLocale = const Locale('en');
+    }
+    notifyListeners();
+  }
+
   void setThemeMode(ThemeMode mode) {
     _themeMode = mode;
     notifyListeners();

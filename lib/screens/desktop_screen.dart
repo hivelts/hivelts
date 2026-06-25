@@ -32,6 +32,7 @@ class DesktopScreen extends StatelessWidget {
 
 
           String wallpaper = 'assets/images/mac_bg.png';
+
           if (osState.currentOS == OS.windows) {
             wallpaper = 'assets/images/win_bg.png';
           } else if (osState.currentOS == OS.linux) {

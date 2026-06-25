@@ -53,4 +53,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remoteGlobal => 'Remote / Global';
+
+  @override
+  String get file => 'File';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get help => 'Help';
 }
